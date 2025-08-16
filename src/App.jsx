@@ -2,9 +2,10 @@ import { useState } from "react";
 import "./App.css";
 import Header from "./components/Header";
 import Card from "./components/Card";
+import usePokemon from "./hooks/usePokemon";
 
 function App() {
-  const [count, setCount] = useState(0);
+  const { data, loading, error } = usePokemon(1);
 
   return (
     <>
@@ -14,7 +15,11 @@ function App() {
             title="Random Pokemon"
             onRandomise={() => console.log("clicked")}
           />
-          <Card>Card Content...</Card>
+          <Card>
+            {loading && <p>loading...</p>}
+            {error && <p className="text-red-500">{error}</p>}
+            {data && <p>{data.name}</p>}
+          </Card>
         </div>
       </div>
     </>
