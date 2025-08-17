@@ -5,7 +5,7 @@ import Card from "./components/Card";
 import usePokemon from "./hooks/usePokemon";
 
 function App() {
-  const { data, loading, error } = usePokemon(1);
+  const { data, loading, error } = usePokemon(7);
 
   return (
     <>
