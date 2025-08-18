@@ -1,11 +1,35 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import "./App.css";
 import Header from "./components/Header";
 import Card from "./components/Card";
 import usePokemon from "./hooks/usePokemon";
+import usePokemonCount from "./hooks/usePokemonCount";
 
 function App() {
-  const { data, loading, error } = usePokemon(7);
+  const [id, setId] = useState(null);
+
+  const {
+    count: pokemonCount,
+    loading: countLoading,
+    error: countError,
+  } = usePokemonCount();
+
+  const {
+    data: pokemonData,
+    loading: pokemonLoading,
+    error: pokemonError,
+  } = usePokemon(id);
+
+  function getRandomId(max) {
+    const min = 1;
+    return Math.floor(Math.random() * (max - min + 1) + min);
+  }
+
+  useEffect(() => {
+    if (pokemonCount && id == null) {
+      setId(getRandomId(pokemonCount));
+    }
+  }, [pokemonCount, id]);
 
   return (
     <>
@@ -13,7 +37,7 @@ function App() {
         <div className="max-w-xl mx-auto p-6">
           <Header
             title="Random Pokemon"
-            onRandomise={() => console.log("clicked")}
+            onRandomise={() => handleRandomise()}
           />
           <Card>
             {loading && <p>loading...</p>}
