@@ -6,6 +6,13 @@ export default function usePokemon(id) {
     const [error, setError] = useState(null);
 
     useEffect(() => {
+        if (!id) {
+            setData(null);
+            setLoading(null);
+            setError(null);
+            return;
+        };
+
         const url = `https://pokeapi.co/api/v2/pokemon/${id}`;
     
         const fetchData = async () => {

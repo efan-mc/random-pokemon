@@ -3,33 +3,24 @@ import "./App.css";
 import Header from "./components/Header";
 import Card from "./components/Card";
 import usePokemon from "./hooks/usePokemon";
-import usePokemonCount from "./hooks/usePokemonCount";
 
 function App() {
-  const [id, setId] = useState(null);
-
-  const {
-    count: pokemonCount,
-    loading: countLoading,
-    error: countError,
-  } = usePokemonCount();
-
-  const {
-    data: pokemonData,
-    loading: pokemonLoading,
-    error: pokemonError,
-  } = usePokemon(id);
-
-  function getRandomId(max) {
+  const getRandomId = () => {
     const min = 1;
-    return Math.floor(Math.random() * (max - min + 1) + min);
-  }
+    const max = 1025;
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+  };
+
+  const [id, setId] = useState(null);
+  const { data: pokemonData, loading, error } = usePokemon(id);
 
   useEffect(() => {
-    if (pokemonCount && id == null) {
-      setId(getRandomId(pokemonCount));
-    }
-  }, [pokemonCount, id]);
+    setId(getRandomId());
+  }, []);
+
+  const handleRandomise = () => {
+    setId(getRandomId());
+  };
 
   return (
     <>
@@ -42,7 +33,9 @@ function App() {
           <Card>
             {loading && <p>loading...</p>}
             {error && <p className="text-red-500">{error}</p>}
-            {data && <p>{data.name}</p>}
+            {!loading && !error && pokemonData && (
+              <p className="capitalize">{pokemonData.name}</p>
+            )}
           </Card>
         </div>
       </div>
