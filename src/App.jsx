@@ -22,6 +22,8 @@ function App() {
     setId(getRandomId());
   };
 
+  const sprite = pokemonData?.sprites?.front_default ?? null;
+
   return (
     <>
       <div className="relative min-h-screen bg-neutral-900">
@@ -34,7 +36,10 @@ function App() {
             {loading && <p>loading...</p>}
             {error && <p className="text-red-500">{error}</p>}
             {!loading && !error && pokemonData && (
-              <p className="capitalize">{pokemonData.name}</p>
+              <div className="flex flex-col items-center">
+                <img src={sprite} className="w-35 h-35" />
+                <p className="capitalize font-semibold">{pokemonData.name}</p>
+              </div>
             )}
           </Card>
         </div>
