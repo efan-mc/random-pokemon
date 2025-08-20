@@ -1,23 +1,4 @@
-const TYPE_COLOURS = {
-  bug: "#91A119",
-  dark: "#624D4E",
-  dragon: "#5060E1",
-  electric: "#FAC000",
-  fairy: "#EF70EF",
-  fighting: "#EF70EF",
-  fire: "#E62829",
-  flying: "#81B9EF",
-  ghost: "#704170",
-  grass: "#3FA129",
-  ground: "#915121",
-  ice: "#3DCEF3",
-  normal: "#9FA19F",
-  poison: "#9141CB",
-  psychic: "#EF4179",
-  rock: "#AFA981",
-  steel: "#60A1B8",
-  water: "#2980EF",
-};
+import { TYPE_COLOURS } from "../utilities/pokemonTypeColours";
 
 export default function Card({ children, types = [] }) {
   const t1 = types[0]?.type?.name || "normal";
@@ -26,11 +7,17 @@ export default function Card({ children, types = [] }) {
   const c1 = TYPE_COLOURS[t1] || "#9FA19F";
   const c2 = TYPE_COLOURS[t2] || c1;
 
+  const isDual = t1 !== t2;
+
+  const bg = isDual
+    ? `linear-gradient(45deg, ${c1} 40%, ${c2} 60%)`
+    : `linear-gradient(45deg, ${c1} 57%, #FFFFFF 100%)`;
+
   return (
     <section
-      className="rounded-2xl p-6 border border-white/30 hover:border-white transition-colors duration-300"
+      className="rounded-2xl p-6 border border-white/70 hover:border-white transition-colors duration-300"
       style={{
-        background: `linear-gradient(-50deg, ${c1} 0%, ${c2} 80%)`,
+        background: bg,
       }}
     >
       {children}
