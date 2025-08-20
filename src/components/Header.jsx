@@ -4,7 +4,7 @@ export default function Header({ title, onRandomise }) {
       <h1 className="text-2xl md:text-3xl font-bold tracking-tight">{title}</h1>
       <button
         onClick={onRandomise}
-        className="px-5 py-2.5 rounded-2xl bg-white/10 hover:bg-white/20 active:scale-95 transition focus-visible:outline-white/50"
+        className="px-5 py-2.5 rounded-2xl border border-white/30 hover:border-white transition-colors duration-300 active:scale-95 focus-visible:outline-white/50 focus:outline-none"
       >
         Randomise
       </button>

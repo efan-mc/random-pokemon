@@ -39,7 +39,9 @@ function App() {
             {!loading && !error && pokemonData && (
               <div className="flex flex-col items-center">
                 <img src={sprite} className="w-44 h-44" />
-                <p className="capitalize font-bold">{pokemonData.name}</p>
+                <p className="capitalize font-bold text-xl mt-4">
+                  {pokemonData.name}
+                </p>
                 <TypeIcons types={pokemonData.types} />
               </div>
             )}
