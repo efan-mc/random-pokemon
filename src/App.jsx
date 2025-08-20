@@ -24,6 +24,7 @@ function App() {
   };
 
   const sprite = pokemonData?.sprites?.front_default ?? null;
+  const types = pokemonData?.types ?? [];
 
   return (
     <>
@@ -33,7 +34,7 @@ function App() {
             title="Random Pokemon"
             onRandomise={() => handleRandomise()}
           />
-          <Card>
+          <Card types={types}>
             {loading && <p>loading...</p>}
             {error && <p className="text-red-500">{error}</p>}
             {!loading && !error && pokemonData && (
@@ -42,7 +43,7 @@ function App() {
                 <p className="capitalize font-bold text-xl mt-4">
                   {pokemonData.name}
                 </p>
-                <TypeIcons types={pokemonData.types} />
+                <TypeIcons types={types} />
               </div>
             )}
           </Card>
