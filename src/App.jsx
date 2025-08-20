@@ -3,6 +3,7 @@ import "./App.css";
 import Header from "./components/Header";
 import Card from "./components/Card";
 import usePokemon from "./hooks/usePokemon";
+import TypeIcons from "./components/TypeIcons";
 
 function App() {
   const getRandomId = () => {
@@ -37,8 +38,9 @@ function App() {
             {error && <p className="text-red-500">{error}</p>}
             {!loading && !error && pokemonData && (
               <div className="flex flex-col items-center">
-                <img src={sprite} className="w-35 h-35" />
-                <p className="capitalize font-semibold">{pokemonData.name}</p>
+                <img src={sprite} className="w-44 h-44" />
+                <p className="capitalize font-bold">{pokemonData.name}</p>
+                <TypeIcons types={pokemonData.types} />
               </div>
             )}
           </Card>
