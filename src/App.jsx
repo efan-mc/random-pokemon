@@ -4,6 +4,7 @@ import Header from "./components/Header";
 import Card from "./components/Card";
 import usePokemon from "./hooks/usePokemon";
 import TypeIcons from "./components/TypeIcons";
+import Stats from "./components/stats";
 
 function App() {
   const getRandomId = () => {
@@ -25,6 +26,7 @@ function App() {
 
   const sprite = pokemonData?.sprites?.front_default ?? null;
   const types = pokemonData?.types ?? [];
+  const stats = pokemonData?.stats ?? [];
 
   return (
     <>
@@ -47,6 +49,9 @@ function App() {
               </div>
             )}
           </Card>
+          <div>
+            <Stats stats={stats} />
+          </div>
         </div>
       </div>
     </>

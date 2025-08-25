@@ -32,8 +32,8 @@ export default function Stats({ stats = [] }) {
   });
 
   return (
-    <div>
-      <h3>Base Stats</h3>
+    <div className="pt-8">
+      <h3 className="font-semibold uppercase opacity-90">Base Stats</h3>
 
       <div>
         {stats.map((item, index) => {
@@ -42,6 +42,21 @@ export default function Stats({ stats = [] }) {
           const label = LABELS[name] ?? name;
           const colour = STAT_COLOURS[name] ?? "#69dc12";
           const pct = Math.min(100, Math.round((value / MAX_STAT) * 100));
+
+          return (
+            <div key={index}>
+              <div className="flex items-baseline justify-between mb-1">
+                <span className="text-sm">{label}</span>
+                <span className="text-sm tabular-nums">{value}</span>
+              </div>
+              <div className="h-2 rounded-full bg-white/15 overflow-hidden">
+                <div
+                  className="h-full rounded-full transition-all duration-300"
+                  style={{ width: `${pct}%`, backgroundColor: colour }}
+                />
+              </div>
+            </div>
+          );
         })}
       </div>
     </div>
