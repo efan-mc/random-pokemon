@@ -58,6 +58,10 @@ export default function Stats({ stats = [] }) {
             </div>
           );
         })}
+        <div className="pt-2">
+          <span className="text-sm">Total: </span>
+          <span className="tabular-nums">{statTotal}</span>
+        </div>
       </div>
     </div>
   );
