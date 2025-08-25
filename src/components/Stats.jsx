@@ -30,4 +30,20 @@ export default function Stats({ stats = [] }) {
       }
     });
   });
+
+  return (
+    <div>
+      <h3>Base Stats</h3>
+
+      <div>
+        {stats.map((item, index) => {
+          const name = item.stat.name;
+          const value = item.base_stat;
+          const label = LABELS[name] ?? name;
+          const colour = STAT_COLOURS[name] ?? "#69dc12";
+          const pct = Math.min(100, Math.round((value / MAX_STAT) * 100));
+        })}
+      </div>
+    </div>
+  );
 }
