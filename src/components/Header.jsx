@@ -8,7 +8,7 @@ export default function Header({ title, onRandomise, isShiny, onToggleShiny }) {
       <div className="flex items-center gap-3">
         <button
           onClick={onRandomise}
-          className="flex-4 px-5 py-2.5 rounded-2xl border border-white/30 hover:border-white transition-colors duration-300 active:scale-95 focus-visible:outline-white/50 focus:outline-none"
+          className="flex-12 px-5 py-2.5 rounded-2xl border border-white/30 hover:border-white transition-colors duration-300 active:scale-95 focus-visible:outline-white/50 focus:outline-none"
         >
           Randomise
         </button>
