@@ -4,17 +4,18 @@ import Header from "./components/Header";
 import Card from "./components/Card";
 import usePokemon from "./hooks/usePokemon";
 import TypeIcons from "./components/TypeIcons";
-import Stats from "./components/stats";
+import Stats from "./components/Stats";
 
 function App() {
+  const [id, setId] = useState(null);
+  const { data: pokemonData, loading, error } = usePokemon(id);
+  const [isShiny, setIsShiny] = useState(false);
+
   const getRandomId = () => {
     const min = 1;
     const max = 1025;
     return Math.floor(Math.random() * (max - min + 1)) + min;
   };
-
-  const [id, setId] = useState(null);
-  const { data: pokemonData, loading, error } = usePokemon(id);
 
   useEffect(() => {
     setId(getRandomId());
@@ -25,8 +26,10 @@ function App() {
   };
 
   const sprite = pokemonData?.sprites?.front_default ?? null;
+  const spriteShiny = pokemonData?.sprites?.front_shiny ?? null;
   const types = pokemonData?.types ?? [];
   const stats = pokemonData?.stats ?? [];
+  const displayedSprite = isShiny && spriteShiny ? spriteShiny : sprite;
 
   return (
     <>
@@ -35,13 +38,15 @@ function App() {
           <Header
             title="Random Pokemon"
             onRandomise={() => handleRandomise()}
+            isShiny={isShiny}
+            onToggleShiny={() => setIsShiny((v) => !v)}
           />
           <Card types={types}>
             {loading && <p>loading...</p>}
             {error && <p className="text-red-500">{error}</p>}
             {!loading && !error && pokemonData && (
               <div className="flex flex-col items-center">
-                <img src={sprite} className="w-44 h-44" />
+                <img src={displayedSprite} className="w-44 h-44" />
                 <p className="capitalize font-bold text-xl mt-4">
                   {pokemonData.name}
                 </p>
