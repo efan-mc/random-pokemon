@@ -46,7 +46,11 @@ function App() {
             {error && <p className="text-red-500">{error}</p>}
             {!loading && !error && pokemonData && (
               <div className="flex flex-col items-center">
-                <img src={displayedSprite} className="w-44 h-44" />
+                <img
+                  src={displayedSprite}
+                  className="w-44 h-44"
+                  alt={`${pokemonData.name} sprite`}
+                />
                 <p className="capitalize font-bold text-xl mt-4">
                   {pokemonData.name}
                 </p>
