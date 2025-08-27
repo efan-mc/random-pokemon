@@ -1,11 +1,13 @@
 import { useState, useEffect } from "react";
 
+// Hook to fetch pokemon data by inputted ID
 export default function usePokemon(id) {
-    const [data, setData] = useState(null);
-    const [loading, setLoading] = useState(true);
-    const [error, setError] = useState(null);
+    const [data, setData] = useState(null); // API response
+    const [loading, setLoading] = useState(true); // Loading state
+    const [error, setError] = useState(null); // Error message
 
     useEffect(() => {
+        // Set inital states to null before ID is selected
         if (!id) {
             setData(null);
             setLoading(null);
@@ -15,6 +17,7 @@ export default function usePokemon(id) {
 
         const url = `https://pokeapi.co/api/v2/pokemon/${id}`;
     
+        // Async fetch for Pokemon
         const fetchData = async () => {
             try {
                 setLoading(true);
@@ -29,7 +32,7 @@ export default function usePokemon(id) {
         }
     
         fetchData();
-    }, [id]);
+    }, [id]); // Run again if ID is changed
 
     return { data, loading, error };
 }
